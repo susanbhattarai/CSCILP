@@ -4,5 +4,6 @@
 %Return a Boolean
 sum-up-numbers-simple([], 0).  %Empty List with Sum 0
 sum-up-numbers-simple([H|T], N) :-
-    (number(H) -> sum-up-numbers-simple(T, Remainder), N is Remainder + H;
-     sum-up-numbers-simple(T, Remainder), N is Remainder).
+    (number(H) -> sum-up-numbers-simple(T, Remainder), N is Remainder + H; %Case where the head is a number
+     is_list(H) -> sum-up-numbers-simple(T, Remainder), N is Remainder; %Case where the head is a list
+     sum-up-numbers-simple(T, Remainder), N is Remainder). %Last case
