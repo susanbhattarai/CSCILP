@@ -15,10 +15,10 @@ Parameters: L is a list and N is the sum of all numbers in L
 Return a Boolean
 **/
 sum-up-numbers-general([], 0). %Empty list with sum 0
-sum-up-numbers-general([H|T], N) :-
+sum-up-numbers-general([H,T], N) :-
     %If head is a list, then use the Predicate sum-up-numbers-simple on head and add %
     is_list(H) -> sum-up-numbers-general(T, Remainder), 
-    sum-up-numbers-simple(H, HeadSum),
+    sum-up-numbers-general(H, HeadSum),
     N is Remainder + HeadSum;
     number(H) -> sum-up-numbers-general(T, Remainder),
     N is Remainder + H;
