@@ -30,12 +30,16 @@ sum-up-numbers-general([H|T], N) :-
     N is Remainder.
 
 
-/**Helper functions
+/**Helper functions(Handles for nested lists)
 PredicateName: is-member
 Parameters: N is a number and L is a list
 Return a boolean
 **/
 is-member(X, [X|_]). %Rule Statement
+is-member(X, [K|Z]) :-
+    is_list(K), %If K is a list, check the presence of X in K too.
+    is-member(X, K); %Or Statement
+    is-member(X,Z).  
 is-member(X, [_|Z]) :-
     is-member(X, Z). %If does not match with head, look at list
 
@@ -53,7 +57,7 @@ common-unique-elements([H|T], L2, ConcatList) :- %If the head is a list
     is_list(H),
     common-unique-elements(H, L2, Nested),
     common-unique-elements(T, L2, Tail),
-    append(Nested, Tail, ConcatList).
+    append(Nested, Tail, ConcatList). %append the nested list with the tail list
 
 common-unique-elements([_|T], L2, Tail) :-   %If not, ignore the head
     common-unique-elements(T, L2, Tail).
