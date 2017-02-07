@@ -21,15 +21,22 @@ If the head is a list, add the predicate with head and the rest of list
 Else, ignore the head value
 **/
 sum-up-numbers-general([], 0). %Empty list with sum 0
+%If head is a list, then use the Predicate sum-up-numbers-simple on head and add 
 sum-up-numbers-general([H|T], N) :-
-    %If head is a list, then use the Predicate sum-up-numbers-simple on head and add 
-    is_list(H) -> sum-up-numbers-general(T, Remainder), %If the head is list, calcuate the sum of head
-    sum-up-numbers-general(H, HeadSum),
-    N is Remainder + HeadSum;
-    number(H) -> sum-up-numbers-general(T, Remainder), 
-    N is Remainder + H;
+    is_list(H),
     sum-up-numbers-general(T, Remainder),
-    N is Remainder.
+    sum-up-numbers-general(H, HeadSum),
+    N is Remainder + HeadSum.
+%If the head is number
+sum-up-numbers-general([H|T], N) :-
+    number(H),
+    sum-up-numbers-general(T, Remainder),
+    N is Remainder + H.
+%If head is non-numeric or not list
+sum-up-numbers-general([_|T], N) :-
+    sum-up-numbers-general(T, N).
+
+
 
 
 /**Helper functions(Handles for nested lists)
