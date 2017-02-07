@@ -1,8 +1,8 @@
-/*Question1(All Test Cases Passed. SB)
+/**Question1(All Test Cases Passed. SB)
 Predicate Name: sum-up-numbers-simple
 Parameters: L is list and N is a sum-up-numbers-simple
 Return a Boolean
-*/
+**/
 sum-up-numbers-simple([], 0).  %Empty List with Sum 0
 sum-up-numbers-simple([H|T], N) :-
     %Case where the head is a number
@@ -38,3 +38,16 @@ Return a boolean
 is-member(X, [X|_]). %Rule Statement
 is-member(X, [_|Z]) :-
     is-member(X, Z). %If does not match with head, look at list
+
+/**Question4
+PredicateName: common-unique-elements\
+Parameters: L1, L2, N
+Result: Boolean
+**/
+common-unique-elements([], _, []). %Rule Statement
+common-unique-elements([H|T], L2, [H|Tail]) :- %If member, add to the result list
+    is-member(H, L2),
+    common-unique-elements(T, L2, Tail).
+
+common-unique-elements([_|T], L2, Tail) :-   %If not, ignore the head
+    common-unique-elements(T, L2, Tail)
