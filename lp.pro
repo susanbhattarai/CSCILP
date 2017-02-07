@@ -49,7 +49,7 @@ common-unique-elements([H|T], L2, [H|Tail]) :- %If member, add to the result lis
     is-member(H, L2),
     common-unique-elements(T, L2, Tail).
 
-common-unique-elements([H|T], L2, [Tail|Nested]) :- %If the head is a list
+common-unique-elements([H|T], L2, append(Tail,Nested)) :- %If the head is a list
     is_list(H),
     common-unique-elements(H, L2, Nested),
     common-unique-elements(T, L2, Tail).
