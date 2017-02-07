@@ -28,3 +28,13 @@ sum-up-numbers-general([H|T], N) :-
     N is Remainder + H;
     sum-up-numbers-general(T, Remainder),
     N is Remainder.
+
+
+/**Helper functions
+PredicateName: is-member
+Parameters: N is a number and L is a list
+Return a boolean
+**/
+is-member(X, [X|_]). %Rule Statement
+is-member(X, [_|Z]) :-
+    is-member(X, Z). %If does not match with head, look at list
