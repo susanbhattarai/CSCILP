@@ -43,9 +43,11 @@ PredicateName: min-above-min
 Params: L1, L2
 Output: Minimum element of L1 > Minimum element of L2
 **/
-
-
-
+min-above-min([A], [], A).
+%If the second list is empty, return the min of first list
+min-above-min(L1, L2, N) :-
+    length(L2, 0),
+    min-val(L2, N).
 
 
 
