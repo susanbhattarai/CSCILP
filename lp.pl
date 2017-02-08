@@ -37,20 +37,18 @@ sum-up-numbers-general([_|T], N) :-
     sum-up-numbers-general(T, N).
 
 
-
-
-/**Helper functions(Handles for nested lists)
-PredicateName: is-member
-Parameters: N is a number and L is a list
-Return a boolean
+/**
+Question3:
+PredicateName: min-above-min
+Params: L1, L2
+Output: Minimum element of L1 > Minimum element of L2
 **/
-is-member(X, [X|_]). %Rule Statement
-is-member(X, [K|Z]) :-
-    is_list(K), %If K is a list, check the presence of X in K too.
-    is-member(X, K); %Or Statement
-    is-member(X,Z).  
-is-member(X, [_|Z]) :-
-    is-member(X, Z). %If does not match with head, look at list
+
+
+
+
+
+
 
 /**Question4
 PredicateName: common-unique-elements\
@@ -70,3 +68,31 @@ common-unique-elements([H|T], L2, ConcatList) :- %If the head is a list
 
 common-unique-elements([_|T], L2, Tail) :-   %If not, ignore the head
     common-unique-elements(T, L2, Tail).
+
+/**Helper functions(Handles for nested lists)
+PredicateName: is-member
+Parameters: N is a number and L is a list
+Return a boolean
+**/
+is-member(X, [X|_]). %Rule Statement
+is-member(X, [K|Z]) :-
+    is_list(K), %If K is a list, check the presence of X in K too.
+    is-member(X, K); %Or Statement
+    is-member(X,Z).  
+is-member(X, [_|Z]) :-
+    is-member(X, Z). %If does not match with head, look at list
+
+
+/**
+PredicateName: min-val
+Parameters: L is a list
+Output: smallest element of L
+**/
+min-val([B], B).
+%If the first element is less than the second element,pass into recursion
+min-val([H, K|T], M) :-
+    H =< K,
+    min-val([H|T], M).
+%Else, skip the head
+min-val([_|T], M) :-
+    min-val(T, M).
