@@ -43,13 +43,16 @@ PredicateName: min-above-min
 Params: L1, L2
 Output: Minimum element of L1 > Minimum element of L2
 **/
-min-above-min([A], [], A).
+min-above-min([A], [], A) :-
+    number(A).
+
 %If the second list is empty, return the min of first list
 min-above-min(L1, L2, N) :-
     length(L2, 0),
     min-val(L1, N).
 
 min-above-min([H|T], L2, H) :-
+    number(H),
     min-val(L2, MinL),
     MinL < H,
     larger-num(T, MinL, H, H).
@@ -92,12 +95,13 @@ is-member(X, [_|Z]) :-
     is-member(X, Z). %If does not match with head, look at list
 
 
-/**
+/*
 PredicateName: min-val
 Parameters: L is a list
 Output: smallest element of L
-**/
-min-val([B], B).
+*/
+min-val([B], B) :-
+    number(B).
 %If the first element is less than the second element,pass into recursion
 min-val([H, K|T], M) :-
     number(H),
@@ -112,18 +116,18 @@ min-val([H, K|T], M) :-
     min-val([K|T], M).
 
 %If the second element is non-numeric
-min-val([H, K|T], M) :-
-    number(H),
-    min-val([H|T], M).
+min-val([_, K|T], M) :-
+    number(K),
+    min-val([K|T], M).
 %Else, skip the head(non-numeric)
 min-val([_|T], M) :-
     min-val(T, M).
 
-/**
+/*
 PredicateName: larger-num
 Params: A list(L), a number(constant) , another number within list
 Output: Returns the number greater than the constant
-**/
+*/
 larger-num([], _, Num, Num). 
 %If the head is greater than const and less than num, set as target
 larger-num([H|T], Const, Num, H) :-
