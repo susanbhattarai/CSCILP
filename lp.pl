@@ -109,3 +109,18 @@ min-val([H, K|T], M) :-
 %Else, skip the head(non-numeric)
 min-val([_|T], M) :-
     min-val(T, M).
+
+/**
+PredicateName: larger-num
+Params: A list(L), a number(constant) , another number within list
+Output: Returns the number greater than the constant
+**/
+larger-num([], _, Num, Num). 
+%If the head is greater than const and less than num, set as target
+larger-num([H|T], Const, Num, H) :-
+    H > Const,
+    H < Num,
+    larger-num(T, Const, H, H).
+%Else, ans is the result of predicate with tail of list
+larger-num([_|T], Const, Num, Ans) :-
+    larger-num(T, Const, Num, Ans).
