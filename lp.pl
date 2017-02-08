@@ -91,8 +91,21 @@ Output: smallest element of L
 min-val([B], B).
 %If the first element is less than the second element,pass into recursion
 min-val([H, K|T], M) :-
+    number(H),
+    number(K),
     H =< K,
     min-val([H|T], M).
-%Else, skip the head
+%If second element is less than the first element
+min-val([H, K|T], M) :-
+    number(H),
+    number(K),
+    K < H,
+    min-val([K|T], M).
+
+%If the second element is non-numeric
+min-val([H, K|T], M) :-
+    number(H),
+    min-val([H|T], M).
+%Else, skip the head(non-numeric)
 min-val([_|T], M) :-
     min-val(T, M).
