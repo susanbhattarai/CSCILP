@@ -121,9 +121,9 @@ min-val([H, K|T], M) :-
     min-val([K|T], M).
 
 %If the second element is non-numeric
-min-val([_, K|T], M) :-
-    number(K),
-    min-val([K|T], M).
+min-val([H, _|T], M) :-
+    number(H),
+    min-val([H|T], M).
 %Else, skip the head(non-numeric)
 min-val([_|T], M) :-
     min-val(T, M).
@@ -136,7 +136,9 @@ Output: Returns the number greater than the constant
 
 larger-num([], _, Num, Num). 
 %If the head is greater than const and less than num, set as target
+
 larger-num([H|T], Const, Num, H) :-
+    number(H),
     H > Const,
     H < Num,
     larger-num(T, Const, H, H).
