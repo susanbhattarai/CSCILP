@@ -68,7 +68,8 @@ Parameters: L1, L2, N
 Result: Boolean
 **/
 common-unique-elements([], _, []). %Rule Statement
-common-unique-elements([H|T], L2, [H|Tail]) :- %If member, add to the result list
+common-unique-elements([H|T], L2, [H|Tail]) :- %If member and only unique in list, add to the result list
+    not(is-member(H, T)),
     is-member(H, L2),
     common-unique-elements(T, L2, Tail).
 
